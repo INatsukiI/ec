@@ -1,0 +1,24 @@
+<%= render 'layouts/customer_header' %>
+<div class="container mb-5">
+  <div class="row mt-5">
+    <div class="col-2">
+      <div>ジャンル検索機能</div>
+    </div>
+    <div class="col-4">
+      <%= image_tag @item.get_product_image(250,150) %>
+    </div>
+    <div class="col-6">
+      <h3 class="font-weight-bold"><%= @item.name %></h3>
+      <p class="mt-2 mb-5"><%= @item.description %></p>
+      <div class="mb-5">
+        <h3 style="display:inline;">￥<%= (@item.without_tax_price * 1.1).floor.to_s(:delimited) %></h3> (税込)
+      </div>
+      <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <%= f.select :amount, [['1個',1], ['2個',2], ['3個',3],['4個',4],['5個',5],['6個',6],['7個',7],['8個',8],['9個',9],['10個',10]], { include_blank: '個数選択'} %>
+        <%= f.submit "カートに入れる", class: "btn btn-success ml-5" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= render 'layouts/footer' %>

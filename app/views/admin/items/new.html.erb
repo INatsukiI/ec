@@ -1,0 +1,54 @@
+<%= render 'layouts/admin_header' %>
+
+<div class="container mb-5">
+  <h4 class="m-5">
+    <span class="bg-light px-4">
+      商品新規登録
+    </span>
+  </h4>
+  <%= form_with model: @item, url: admin_items_path do |f| %>
+    <div class="row no-gutters mb-2">
+      <div class="col-2"></div>
+      <div class="col-2">商品画像</div>
+      <div class="col-4"><%= f.file_field :product_image %></div>
+    </div>
+    <div class="row no-gutters mb-2">
+      <div class="col-2"></div>
+      <div class="col-2">商品名</div>
+      <div class="col-8"><%= f.text_field :name , placeholder: "商品名" , class: "w-50" %></div>
+    </div>
+    <div class="row no-gutters mb-2">
+      <div class="col-2"></div>
+      <div class="col-2">商品説明</div>
+      <div class="col-8"><%= f.text_area :description, placeholder: "ここに説明文を記述します" , class: "w-50", style: "height: 200px;" %></div>
+    </div>
+    <div class="row no-gutters mb-3">
+      <div class="col-2"></div>
+      <div class="col-2">ジャンル</div>
+      <div class="col-8"><%= f.collection_select :genre_id, @genres.all, :id, :name, {include_blank: "-- 選択してください --"}, {class: "w-50"} %></div>
+    </div>
+    <div class="row no-gutters mb-3">
+      <div class="col-2"></div>
+      <div class="col-2">税抜価格</div>
+      <div class="col-8"><%= f.text_field :without_tax_price , placeholder: "1000" , class: "w-50" %>円</div>
+    </div>
+    <div class="row no-gutters mb-2">
+      <div class="col-2"></div>
+      <div class="col-2">販売ステータス</div>
+      <div class="col-4">
+        <%= f.radio_button :is_sale, :true, checked: true %>
+        <%= f.label :is_sale, "販売中" , class: "mr-5"%>
+        <%= f.radio_button :is_sale, :false %>
+        <%= f.label :is_sale, "販売停止中" %>
+      </div>
+    </div>
+    <div class="row no-gutters mb-2">
+      <div class="col-5"></div>
+      <div class="col-2"><%= f.submit "新規登録", class: "btn btn-success w-75" %></div>
+      <div class="col-5"></div>
+    </div>
+  <% end %>
+
+</div>
+
+<%= render 'layouts/footer' %>

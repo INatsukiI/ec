@@ -1,0 +1,52 @@
+<%= render 'layouts/admin_header' %>
+
+<div class="container mb-5">
+  <div class="row">
+    <h4 class="m-5 col-2">
+      <span class="bg-light px-4">
+        商品一覧
+      </span>
+    </h4>
+    <div class="col-6"></div>
+    <div class="col-2">
+      <h4 class="m-5">
+      <%= link_to new_admin_item_path , class: "text-muted text-decoration-none ml-5" do %>
+        <span class="bg-light px-2 pb-1 rounded-circle">
+          +
+        </span>
+      <% end %>
+    </h4>
+    </div>
+  </div>
+  <table style="width: 1000px;">
+    <tr class="row py-2 bg-light border-top border-bottom border-secondary">
+      <th class="col-1">商品ID</th>
+      <th class="col-3">商品名</th>
+      <th class="col-2">税抜価格</th>
+      <th class="col-4">ジャンル</th>
+      <th class="col-2">ステータス</th>
+    </tr>
+    <% @items.each do |item| %>
+      <tr class="row py-2 border-bottom border-secondary">
+        <td class="col-1"><%= item.id %></td>
+        <td class="col-3"><%= link_to item.name, admin_item_path(item.id) , class: "text-dark text-decoration-none border-bottom border-dark"%></td>
+        <td class="col-2"><%= item.without_tax_price.to_s(:delimited) %></td>
+        <% if item.genre != nil %>
+          <td class="col-4"><%= item.genre.name %></td>
+        <% else %>
+          <td class="col-4"></td>
+        <% end %>
+        <td class="col-2">
+          <% if item.is_sale %>
+            <div class="font-weight-bold text-success">販売中</div>
+          <% else %>
+            <div class="font-weight-bold text-muted">販売停止中</div>
+          <% end %>
+        </td>
+        <td class="col-2"></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<%= render 'layouts/footer' %>

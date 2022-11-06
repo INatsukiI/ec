@@ -1,0 +1,57 @@
+<%= render 'layouts/customer_header' %>
+<div class="container">
+  <h4 class="m-5">
+    <span class="bg-light px-4">
+      会員情報編集
+    </span>
+  </h4>
+
+  <%= form_with model: @customer, url: customers_path , method: :patch do |f| %>
+    <div class="row pb-2  no-gutters">
+      <div class="col-3">名前</div>
+      <div class="col-3"><%= f.text_field :last_name %></div>
+      <div class="col-3"><%= f.text_field :first_name %></div>
+      <div class="col-3"></div>
+    </div>
+
+    <div class="row pb-2  no-gutters">
+      <div class="col-3">フリガナ</div>
+      <div class="col-3"><%= f.text_field :last_name_kana %></div>
+      <div class="col-3"><%= f.text_field :first_name_kana %></div>
+      <div class="col-3"></div>
+    </div>
+
+    <div class="row pb-2 no-gutters">
+      <div class="col-3">郵便番号</div>
+      <div class="col-3"><%= f.text_field :post_code %></div>
+      <div class="col-6"></div>
+    </div>
+
+    <div class="row pb-2 no-gutters">
+      <div class="col-3">住所</div>
+      <div class="col-6"><%= f.text_field :address, class: "w-100"%></div>
+      <div class="col-3"></div>
+    </div>
+
+    <div class="row pb-2 no-gutters">
+      <div class="col-3">電話番号</div>
+      <div class="col-3"><%= f.text_field :phone_number %></div>
+      <div class="col-6"></div>
+    </div>
+
+    <div class="row pb-2 no-gutters">
+      <div class="col-3">メールアドレス</div>
+      <div class="col-3"><%= f.email_field :email %></div>
+      <div class="col-6"></div>
+    </div>
+
+    <div class="row pb-5 pt-3 no-gutters">
+      <div class="col-3"></div>
+      <div class="col-3"><%= f.submit "編集内容を保存" ,class: "btn btn-success w-100"%></div>
+      <div class="col-1"></div>
+      <div class="col-3"><%= link_to "退会する", cusomers_quit_path, class: "btn btn-danger"%></div>
+      <div class="col-2"></div>
+    </div>
+  <% end %>
+</div>
+<%= render 'layouts/footer' %>

@@ -1,0 +1,43 @@
+class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!
+
+  def show
+    @customer = current_customer
+  end
+
+  def edit
+    @customer = current_customer
+  end
+
+  def update
+    @customer = current_customer
+
+    if @customer.update(customer_params)
+      redirect_to customers_path
+    else
+      render :edit
+    end
+  end
+
+  def quit
+  end
+
+  def withdraw
+    @customer = current_customer
+    if withdraw_update(@customer)
+      redirect_to logout_path
+    else
+      render :show
+    end
+  end
+
+
+  private
+  def customer_params
+    params.require(:customer).permit(:last_name,:first_name,:last_name_kana,:first_name_kana,:post_code,:address,:phone_number)
+  end
+
+  def withdraw_update(customer)
+    customer.update(is_withdraw: true)
+  end
+end

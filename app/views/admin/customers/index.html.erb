@@ -1,0 +1,32 @@
+<%= render 'layouts/admin_header' %>
+
+<div class="container mb-5">
+  <h4 class="m-5">
+    <span class="bg-light px-4">
+      会員一覧
+    </span>
+  </h4>
+
+  <div class="row no-gutters py-2 bg-light border-top border-bottom border-secondary" style="margin-left: 150px; margin-right: 200px;">
+    <div class="col-2 pl-2 font-weight-bold">会員ID</div>
+    <div class="col-4 font-weight-bold"><ins>氏名</ins></div>
+    <div class="col-3 font-weight-bold">メールアドレス</div>
+    <div class="col-2 pl-4 font-weight-bold">ステータス</div>
+  </div>
+  <% @cusomers.each do |cusomer| %>
+    <div class="row no-gutters py-2 border-bottom border-secondary" style="margin-left: 150px; margin-right: 200px;">
+      <div class="col-2 pl-2"><%= cusomer.id %></div>
+      <div class="col-4"><ins><%= cusomer.last_name + cusomer.first_name %></ins></div>
+      <div class="col-3"><%=cusomer.email %></div>
+      <div class="col-2 pl-4">
+        <% if cusomer.is_withdraw %>
+          <div class="font-weight-bold text-muted">退会</div>
+        <% else %>
+          <div class="font-weight-bold text-success">有効</div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+<%= render 'layouts/footer' %>

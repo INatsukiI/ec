@@ -1,0 +1,38 @@
+<%= render 'layouts/admin_header' %>
+
+<div class="container mb-5">
+  <div>
+    <h4 class="m-5">
+      <span class="bg-light px-4">
+        注文履歴一覧
+      </span>
+    </h4>
+  </div>
+
+  <div class="m-5 px-4">
+    <table style="width: 800px;">
+      <tr class="row no-gutters py-2 bg-light border-top border-bottom border-secondary">
+        <td class="col-4 pl-2 font-weight-bold">購入日時</td>
+        <td class="col-2 font-weight-bold">購入者</td>
+        <td class="col-2 font-weight-bold">注文個数</td>
+        <td class="col-3 font-weight-bold">注文ステータス</td>
+      </tr>
+      <% @orders.each do |order| %>
+        <% count=0 %>
+        <% order.order_details.each do |detail| %>
+          <% count += detail.amount %>
+        <% end %>
+        <tr class="row no-gutters py-2 border-bottom border-secondary">
+          <td class="col-4 pl-2"><ins><%= link_to order.created_at.strftime('%Y/%m/%d %H:%M:%S'), admin_order_path(order.id) %></ins></td>
+          <td class="col-2"><%= order.customer.last_name + order.customer.first_name %></td>
+          <td class="col-2"><%= count %></td>
+          <td class="col-3">
+            <%= Order.order_statuses_i18n[order.order_status]%>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<%= render 'layouts/footer' %>

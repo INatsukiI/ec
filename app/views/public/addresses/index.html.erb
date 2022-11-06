@@ -1,0 +1,45 @@
+<%= render 'layouts/customer_header' %>
+<div class="container">
+  <div class="mb-5">
+    <h4 class="m-5">
+      <span class="bg-light px-4">
+        配送先登録/一覧
+      </span>
+  </h4>
+  <%= form_with model: @address, url: addresses_path do |f| %>
+  <div class="row no-gutters mb-2">
+    <div class="col-3">郵便番号(ハイフンなし)</div>
+    <div class="col-7"><%= f.text_field :post_code, placeholder: "0000000" %></div>
+  </div>
+  <div class="row no-gutters mb-2">
+    <div class="col-3">住所</div>
+    <div class="col-6"><%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", class: "w-100" %></div>
+  </div>
+  <div class="row no-gutters">
+    <div class="col-3">宛名</div>
+    <div class="col-6"><%= f.text_field :name, placeholder: "令和道子" %></div>
+    <div class="col-2"><%= f.submit "新規登録", class: "btn btn-success px-4" %></div>
+  </div>
+  <% end %>
+  </div>
+  <table border="1" class="w-75 mb-5">
+    <tr class="row no-gutters bg-light">
+      <th class="col-2 py-2 pl-1">郵便番号</th>
+      <th class="col-5 py-2 pl-1">住所</th>
+      <th class="col-2 py-2 pl-1">宛名</th>
+      <th class="col-3 py-2 pl-1"></th>
+    </tr>
+    <tr class="row no-gutters">
+      <% @addresses.each do |address| %>
+        <td class="col-2 py-2 pl-1"><%= address.post_code %></td>
+        <td class="col-5 py-2 pl-1"><%= address.address %></td>
+        <td class="col-2 py-2 pl-1"><%= address.name %></td>
+        <td class="col-3">
+          <%= link_to "編集する", edit_address_path(address), class: "btn btn-success m-1" %>
+          <%= link_to "削除する", address_path(address), method: :delete, class: "btn btn-danger m-1" %>
+        </td>
+      <% end %>
+    </tr>
+  </table>
+</div>
+<%= render 'layouts/footer' %>

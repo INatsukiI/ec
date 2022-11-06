@@ -1,0 +1,33 @@
+<%= render 'layouts/customer_header' %>
+<div class="container">
+  <h4 class="m-5">
+    <span class="bg-light px-4">
+      管理者ログイン
+    </span>
+  </h4>
+
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row no-gutters mb-3">
+      <div class="col-2"></div>
+      <div class="col-3">メールアドレス</div>
+      <div class="col-6"><%= f.email_field :email, autofocus: true, autocomplete: "email" ,placeholder: "sample@example.com" , class: "w-75" %></div>
+      <div class="col-2"></div>
+    </div>
+
+    <div class="row no-gutters mb-5">
+      <div class="col-2"></div>
+      <div class="col-3">パスワード</div>
+      <div class="col-6"><%= f.password_field :password, autocomplete: "current-password" , class: "w-75"%></div>
+      <div class="col-2"></div>
+    </div>
+
+    <div class="row no-gutters mb-5">
+      <div class="col-5"></div>
+      <div class="col-2"><%= f.submit "ログイン",  class: "btn btn-primary w-75" %></div>
+      <div class="col-5"></div>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'layouts/footer' %>
